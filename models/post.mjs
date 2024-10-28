@@ -1,7 +1,7 @@
-const mongoose= require ('mongoose');
+import { Schema, model } from 'mongoose';
 
-const postSchema =new mongoose.Schema({
-    userID: {type:mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+const postSchema =new Schema({
+    userID: {type:Schema.Types.ObjectId, ref: 'User', required: true},
     title: {type: String, required: true},
     content: String,
     location: String,
@@ -9,4 +9,4 @@ const postSchema =new mongoose.Schema({
     date:{type: Date, default: Date.now },
 });
 postSchema.index({ location: 1, date: -1});
-module.exports = mongoose.model('Post', postSchema);
+export default model('Post', postSchema);

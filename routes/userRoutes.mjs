@@ -1,11 +1,11 @@
-const express = require ('express');
-const User = require('../models/user.mjs');
-const router =express.Router();
+import { Router } from 'express';
+import User, { find, findByIdAndUpdate } from '../models/user.mjs';
+const router =Router();
 
 //Get users
 router.get('/', async (req, res) => {
     try{
-        const users = await User.find();
+        const users = await find();
         res.json(Users);
     } catch (error) {
         res.status(500).json({ error: 'Server Error'});
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 //patch userbyId
 router.patch('/:id', async (req, res) => {
     try{
-        const updatedUser= await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const updatedUser= await findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.json(updatedUser);
     } catch (error) {
         res.status(400).json({ error: error.message});
@@ -43,4 +43,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
